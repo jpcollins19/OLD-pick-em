@@ -1,0 +1,164 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.box {
+  height: 100%;
+  width: calc(50% - 2rem);
+  position: absolute;
+}
+
+.left {
+  left: 0;
+  background: linear-gradient(
+    to bottom,
+    rgb(8, 10, 10) 0%,
+    #0c0b03 50%,
+    rgb(3, 211, 238) 100%
+  );
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header > h1 {
+  margin-top: 4%;
+}
+
+.white-text {
+  margin: 0;
+  text-align: center;
+  text-shadow: 2px 2px black;
+  color: white;
+}
+
+.full-spread-info-cont {
+  display: flex;
+  flex-direction: column;
+  padding: 0rem 4rem 0rem 4rem;
+  overflow: auto;
+}
+
+.header-cont {
+  display: flex;
+  justify-content: space-around;
+}
+
+/*
+
+.right {
+  right: 0;
+  background: linear-gradient(
+    to bottom,
+    rgb(8, 10, 10) 0%,
+    #0c0b03 50%,
+    rgb(222, 238, 3) 100%
+  );
+  margin-top: 0;
+}
+
+
+
+
+
+
+.row-cont {
+  display: flex;
+  padding: 0.3rem 0rem 0.3rem 0rem;
+}
+
+.name-cont > input {
+  width: 8rem;
+}
+
+.spread-cont {
+  padding-left: 2.8rem;
+}
+
+.spread-cont > input {
+  width: 2rem;
+}
+
+.locked-cont {
+  padding-left: 6.5rem;
+}
+
+.locked-cont > input {
+  width: 2rem;
+}
+
+.rank-cont {
+  padding-left: 6rem;
+}
+
+.rank-cont > input {
+  width: 2rem;
+} */
+
+/*//////////bottom////////////*/
+/* 
+.rank-button-cont {
+  display: flex;
+  flex: 0.53;
+}
+
+.full-rank-info-cont {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 0rem 4rem 0rem 4rem;
+}
+
+.full-rank-info-cont > div {
+  display: flex;
+}
+
+.rank-column > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  justify-content: center;
+  width: 10rem;
+}
+
+.rank-column > div {
+  padding-top: 0.5rem;
+}
+
+.small-box {
+  width: 30%;
+}
+
+.team-name-column > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  justify-content: center;
+  width: 10rem;
+}
+.team-name-column > div {
+  padding-top: 0.5rem;
+}
+
+.center {
+  text-align: center;
+}
+
+.bold {
+  font-weight: bolder;
+}
+
+.name-box {
+  width: 100%;
+} */

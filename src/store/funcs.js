@@ -6,11 +6,6 @@ const sort = (arr) => {
     }, [])
     .sort((a, b) => b - a);
 
-  //[16, 15,  14, 13.5, 13, 11, 10, 9, 8.5, 7, 6.5, 5, 4.5, 3, 2, 1]
-
-  // console.log(`joe`);
-  // console.log(spreadOrderArray);
-
   const spreadWTeamsAsValues = arr.reduce((a, obj) => {
     if (!a.hasOwnProperty(obj.spread)) {
       a[obj.spread] = [obj.name];
@@ -19,28 +14,6 @@ const sort = (arr) => {
     }
     return a;
   }, {});
-
-  // console.log(`joe`);
-  // console.log(spreadWTeamsAsValues);
-
-  // {
-  //   '1': [ 'giants' ],
-  //   '2': [ 'ravens' ],
-  //   '3': [ 'bengals' ],
-  //   '5': [ 'bills' ],
-  //   '7': [ 'vikings' ],
-  //   '9': [ 'chargers' ],
-  //   '10': [ 'bills' ],
-  //   '11': [ 'fins' ],
-  //   '13': [ 'pack' ],
-  //   '14': [ 'browns' ],
-  //   '15': [ 'steelers' ],
-  //   '16': [ 'colts' ],
-  //   '8.5': [ 'hawks' ],
-  //   '6.5': [ 'lions' ],
-  //   '4.5': [ 'pats' ],
-  //   '13.5': [ 'bears' ]
-  // }
 
   const sameSpreadCalc = (arr) => {
     const numOfTeams = arr.length;
@@ -62,7 +35,6 @@ const sort = (arr) => {
 
   const spreadsUsed = [];
   const rankNumbersUsed = [];
-  // const teamsIdsAccountedFor = [];
   let reduceArrayAnswer = [];
   let ranking = arr.length;
 
@@ -79,9 +51,6 @@ const sort = (arr) => {
       rankNumbersUsed.push(obj.rank);
     });
 
-  // console.log(`joe`);
-  // console.log(reduceArrayAnswer);
-
   let currentRank = arr.length;
   const onHoldObjects = [];
 
@@ -93,7 +62,6 @@ const sort = (arr) => {
 
       if (!spreadsUsed.includes(spread)) {
         const teamArrayBasedOnSpread = spreadWTeamsAsValues[spread];
-        // [ 'hawks' ] || [ 'hawks', 'vikings' ]
 
         if (teamArrayBasedOnSpread.length === 1) {
           const teamObj = arr.filter(
@@ -119,22 +87,12 @@ const sort = (arr) => {
             return teamObj[0];
           });
 
-          // [
-          //   { id: 1, name: 'hawks', spread: 8, rank: null, locked: false },
-          //   { id: 2, name: 'vikings', spread: 8, rank: null, locked: false }
-          // ]
-
           const teamOrder = sameSpreadCalc(teamListing);
-          // { '1': 'vikings', '2': 'hawks' }
 
           Object.values(teamOrder).map((team) => {
             const teamObjInfo = arr.filter(
               (obj) => obj.name === team && !obj.locked
             )[0];
-
-            // console.log(`joe`);
-            // console.log(teamObjInfo);
-            //{ id: 1, name: 'hawks', spread: 8, rank: null, locked: false }
 
             if (teamObjInfo !== undefined) {
               const teamObj2Submit = {};

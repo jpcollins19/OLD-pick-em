@@ -1,5 +1,3 @@
-//do api
-//add test specs & run
 //add test specs, audit/clean code
 //add funcs, audit/clean code
 //do store
