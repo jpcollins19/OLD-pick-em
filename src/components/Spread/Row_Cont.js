@@ -1,41 +1,21 @@
-// const Row_Cont = ({ teamNum, changeHandler }) => {
-//   let lockedVal = false;
+const Row_Cont = ({ number, onChange }) => {
+  const columns = ["name", "spread", "locked", "rank"];
 
-//   return (
-//     <div className="row-cont">
-//       <div className="name-cont">
-//         <input
-//           className="center bold"
-//           onChange={(ev) => changeHandler('name', ev.target.value, teamNum)}
-//         />
-//       </div>
-//       <div className="spread-cont">
-//         <input
-//           className="center bold"
-//           onChange={(ev) =>
-//             changeHandler('spread', Number(ev.target.value), teamNum)
-//           }
-//         />
-//       </div>
-//       <div className="locked-cont">
-//         <input
-//           type="checkbox"
-//           onChange={(ev) => {
-//             lockedVal = !lockedVal;
-//             changeHandler('locked', lockedVal, teamNum);
-//           }}
-//         />
-//       </div>
-//       <div className="rank-cont">
-//         <input
-//           className="center bold"
-//           onChange={(ev) =>
-//             changeHandler('rank', Number(ev.target.value), teamNum)
-//           }
-//         />
-//       </div>
-//     </div>
-//   );
-// };
+  //   const set = setObj[`setTeam${number}`];
 
-// export default connect(null)(Row_Cont);
+  return (
+    <div className="row-cont">
+      {columns.map((column) => (
+        <div key={column} className={`${column}-cont`}>
+          <input
+            className={column !== "lockwd" ? "center bold" : ""}
+            type={column === "locked" ? "checkbox" : ""}
+            onChange={(ev) => onChange(number, column, ev.target.value)}
+          />
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default Row_Cont;

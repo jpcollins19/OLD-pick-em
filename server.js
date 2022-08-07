@@ -1,6 +1,6 @@
-//add test specs, audit/clean code
-//add funcs, audit/clean code
-//do store
+//testing - on the following:  with locking > / no dupe spreads > sorts 3 teams correctly
+
+//url work -on error handling for spread info page
 
 const express = require("express");
 const app = express();

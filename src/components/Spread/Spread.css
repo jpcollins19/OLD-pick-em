@@ -53,27 +53,17 @@ body {
   justify-content: space-around;
 }
 
-/*
-
-.right {
-  right: 0;
-  background: linear-gradient(
-    to bottom,
-    rgb(8, 10, 10) 0%,
-    #0c0b03 50%,
-    rgb(222, 238, 3) 100%
-  );
-  margin-top: 0;
-}
-
-
-
-
-
-
 .row-cont {
   display: flex;
   padding: 0.3rem 0rem 0.3rem 0rem;
+}
+
+.center {
+  text-align: center;
+}
+
+.bold {
+  font-weight: bolder;
 }
 
 .name-cont > input {
@@ -102,7 +92,21 @@ body {
 
 .rank-cont > input {
   width: 2rem;
-} */
+}
+
+/*
+
+.right {
+  right: 0;
+  background: linear-gradient(
+    to bottom,
+    rgb(8, 10, 10) 0%,
+    #0c0b03 50%,
+    rgb(222, 238, 3) 100%
+  );
+  margin-top: 0;
+}
+ */
 
 /*//////////bottom////////////*/
 /* 
@@ -151,13 +155,9 @@ body {
   padding-top: 0.5rem;
 }
 
-.center {
-  text-align: center;
-}
 
-.bold {
-  font-weight: bolder;
-}
+
+
 
 .name-box {
   width: 100%;
