@@ -24,6 +24,42 @@ body {
   flex-direction: column;
 }
 
+.full-rank-info-cont {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0rem 4rem 0rem 4rem;
+  overflow: auto;
+  border: solid 2px orange;
+}
+
+.column-cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 10rem;
+  border: solid 2px red;
+}
+
+.column-cont > input {
+  display: flex;
+  text-align: center;
+  font-weight: bold;
+  margin: 5px;
+}
+
+.column-cont > h2 {
+  margin-top: 2rem;
+}
+
+.name-cont {
+  width: 8rem;
+}
+
+.rank-cont {
+  width: 3rem;
+}
+
 /*//////////bottom////////////*/
 /* 
 .rank-button-cont {

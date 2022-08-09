@@ -1,21 +1,20 @@
-const Row_Cont = ({ number, onChange }) => {
-  const columns = ["lastTeam", "name", "spread", "locked", "rank"];
-
+const Column_Cont = ({ rankInfo, column }) => {
   return (
-    <div className="row-cont">
-      {columns.map((column) => (
-        <div key={column} className={`${column}-cont`}>
+    <div className="column-cont">
+      <h2 className="white-text">
+        {column && column === "name" ? "Team" : "Rank"}
+      </h2>
+      {rankInfo &&
+        rankInfo.map((team, idx) => (
           <input
-            className={column !== "lockwd" ? "center bold" : ""}
-            type={
-              column === "locked" || column === "lastTeam" ? "checkbox" : ""
-            }
-            onChange={(ev) => onChange(number, column, ev.target.value)}
-          />
-        </div>
-      ))}
+            key={idx}
+            className={`${column && column}-cont`}
+            value={team[column && column]}
+            readOnly
+          ></input>
+        ))}
     </div>
   );
 };
 
-export default Row_Cont;
+export default Column_Cont;

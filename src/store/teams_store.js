@@ -2,7 +2,7 @@ import axios from "axios";
 
 const LOAD_TEAMS = "LOAD_TEAMS";
 const ADD_TEAM = "ADD_TEAM";
-const CLEAR_TEAMS = "CLEAR_TEAMS";
+const DELETE_TEAM = "DELETE_TEAM";
 
 //////////////////////////////////// ACTION CREATORS below:
 
@@ -14,8 +14,8 @@ const _addTeam = (team) => {
   return { type: ADD_TEAM, team };
 };
 
-const _clearTeams = (team) => {
-  return { type: CLEAR_TEAMS, team };
+const _deleteTeam = (team) => {
+  return { type: DELETE_TEAM, team };
 };
 
 //////////////////////////////////// THUNKS below:
@@ -38,8 +38,12 @@ export const clearTeams = (teams) => {
   return async (dispatch) => {
     teams.map(async (team) => {
       team = await axios.delete(`/api/teams/${team.id}`);
-      dispatch(_clearTeams(team));
+      dispatch(_deleteTeam(team));
     });
+
+    setTimeout(() => {
+      dispatch(loadTeams());
+    }, 200);
   };
 };
 
@@ -49,7 +53,7 @@ export const teams = (state = [], action) => {
       return action.teams;
     case ADD_TEAM:
       return [...state, action.team];
-    case CLEAR_TEAMS:
+    case DELETE_TEAM:
       return [...state].filter((team) => team.id !== action.team.id);
     default:
       return state;

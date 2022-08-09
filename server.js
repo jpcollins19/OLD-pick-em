@@ -1,6 +1,10 @@
-//testing - on the following:  with locking > / no dupe spreads > sorts 3 teams correctly
+//testing - on the following:  with locking & dupe spreads > sorts 3 teams correctly
 
-//url work -on right side Rank
+//url work - try and break everything
+
+//roll through each file and comment stuff out
+
+//send to heroku
 
 const express = require("express");
 const app = express();

@@ -10,7 +10,7 @@ const setAudit = (arr) => {
 
   const set = new Set(arr);
 
-  console.log("set", set);
+  // console.log("set", set);
 
   let error = false;
 
@@ -52,6 +52,7 @@ const randomizeSingleSpread = (arr) => {
   let onTeam = 0;
 
   const numOfTeams = arr.length;
+
   let counter = numOfTeams;
 
   const randomizedObj = {};
@@ -72,7 +73,7 @@ const randomizeSingleSpread = (arr) => {
     teamName = arr.find((team) => team.name === teamName);
 
     teamName.rank = rank;
-    rank++;
+    rank--;
     return teamName;
   });
 
@@ -128,48 +129,71 @@ const sameSpreadAudit = (arr) => {
 };
 
 const sort = (arr) => {
-  let rank = 1;
+  let rank = arr.length;
+
+  // console.log("rank", rank);
 
   const lockedAudit = arr.map((team) => team.locked);
 
   // console.log("lockedAudit", lockedAudit);
 
   if (lockedAudit.includes(true)) {
-    const numOfTeams = arr.length;
+    // console.log("lockedAudit is true in sort func");
 
-    let rankUsed = [];
+    const numOfTeams = arr.length + 1;
 
-    let newRank = [];
-
-    let rank = 1;
+    const ranksUsed = [];
+    const lockedTeams = [];
 
     arr
       .filter((team) => team.locked)
       .forEach((team) => {
-        rankUsed.push(team.rank);
-        newRank.push(team);
+        const invertedRank =
+          team.rank === arr.length ? numOfTeams - team.rank : team.rank;
+
+        ranksUsed.push(invertedRank);
+        team.rank = invertedRank;
+        lockedTeams.push(team);
       });
 
-    console.log("rankUsed", rankUsed);
+    // console.log("rankUsed", ranksUsed);
+    // console.log("lockedTeams", lockedTeams);
 
-    console.log("newRank", newRank);
+    arr = arr
+      .filter((team) => !team.locked)
+      .sort((a, b) => b.spread - a.spread)
+      .map((team) => {
+        while (ranksUsed.includes(rank)) rank--;
+
+        ranksUsed.push(rank);
+        team.rank = rank;
+        rank--;
+
+        return team;
+      });
+
+    // console.log("arr after filter", arr);
+
+    arr = [...arr, ...lockedTeams];
+
+    // console.log("arr after adding locked teams", arr);
   } else {
     arr = arr
       .sort((a, b) => b.spread - a.spread)
       .map((team) => {
         team.rank = rank;
-        rank++;
+        rank--;
         return team;
       });
 
-    // console.log("arr after OG spread sort", arr);
+    //console.log("arr after OG spread sort", arr);
   }
 
   arr = sameSpreadAudit(arr);
 
   // console.log("arr after sameSpreadAudit", arr);
 
-  return arr.sort((a, b) => a.rank - b.rank);
+  return arr.sort((a, b) => b.rank - a.rank);
 
   // console.log("nugget", sameSpreadCalc(arr));
 
