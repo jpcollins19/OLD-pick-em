@@ -1,6 +1,6 @@
 //testing - on the following:  with locking > / no dupe spreads > sorts 3 teams correctly
 
-//url work -on error handling for spread info page
+//url work -on right side Rank
 
 const express = require("express");
 const app = express();

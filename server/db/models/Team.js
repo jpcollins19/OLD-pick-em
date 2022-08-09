@@ -20,6 +20,10 @@ const Team = db.define("teams", {
     type: BOOLEAN,
     defaultValue: false,
   },
+  lastTeam: {
+    type: BOOLEAN,
+    defaultValue: false,
+  },
 });
 
 module.exports = Team;

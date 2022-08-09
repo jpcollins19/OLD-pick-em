@@ -6,11 +6,17 @@ const createCountObj = (arr, key) => {
 };
 
 const setAudit = (arr) => {
+  console.log("arr", arr);
+
   const set = new Set(arr);
+
+  console.log("set", set);
 
   let error = false;
 
   if (set.size === 2 && set.has(null)) error = true;
+
+  if (set.size === 1 && set.has(null)) error = true;
 
   // console.log("error in set func", error);
 

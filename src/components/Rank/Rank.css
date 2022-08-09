@@ -1,0 +1,80 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.box {
+  height: 100%;
+  width: calc(50% - 5px);
+  position: absolute;
+}
+
+.right {
+  right: 0;
+  background: linear-gradient(
+    to bottom,
+    rgb(8, 10, 10) 0%,
+    #0c0b03 50%,
+    rgb(222, 238, 3) 100%
+  );
+  display: flex;
+  flex-direction: column;
+}
+
+/*//////////bottom////////////*/
+/* 
+.rank-button-cont {
+  display: flex;
+  flex: 0.53;
+}
+
+.full-rank-info-cont {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 0rem 4rem 0rem 4rem;
+}
+
+.full-rank-info-cont > div {
+  display: flex;
+}
+
+.rank-column > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  justify-content: center;
+  width: 10rem;
+}
+
+.rank-column > div {
+  padding-top: 0.5rem;
+}
+
+.small-box {
+  width: 30%;
+}
+
+.team-name-column > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  justify-content: center;
+  width: 10rem;
+}
+.team-name-column > div {
+  padding-top: 0.5rem;
+}
+
+
+
+
+
+.name-box {
+  width: 100%;
+} */

@@ -289,9 +289,9 @@ describe("sort func", () => {
         teams = teams.filter((team) => teams2Find.includes(team.name));
 
         teams = teams.map((team) => {
-          if (team.name === "bills") team.spread = 6;
-          if (team.name === "colts") team.spread = 8;
-          if (team.name === "titans") team.spread = 7;
+          if (team.name === "bills") team.spread = "6";
+          if (team.name === "colts") team.spread = "8";
+          if (team.name === "titans") team.spread = "7";
 
           return team;
         });
@@ -313,11 +313,11 @@ describe("sort func", () => {
         teams = teams.filter((team) => teams2Find.includes(team.name));
 
         teams = teams.map((team) => {
-          if (team.name === "bills") team.spread = 1;
-          if (team.name === "colts") team.spread = 8;
-          if (team.name === "titans") team.spread = 4;
-          if (team.name === "wash") team.spread = 4.5;
-          if (team.name === "eagles") team.spread = 3;
+          if (team.name === "bills") team.spread = "1";
+          if (team.name === "colts") team.spread = "8";
+          if (team.name === "titans") team.spread = "4";
+          if (team.name === "wash") team.spread = "4.5";
+          if (team.name === "eagles") team.spread = "3";
 
           return team;
         });
@@ -352,16 +352,16 @@ describe("sort func", () => {
         teams = teams.filter((team) => teams2Find.includes(team.name));
 
         teams = teams.map((team) => {
-          if (team.name === "bills") team.spread = 1;
-          if (team.name === "colts") team.spread = 8;
-          if (team.name === "titans") team.spread = 4;
-          if (team.name === "wash") team.spread = 4.5;
-          if (team.name === "eagles") team.spread = 3;
-          if (team.name === "browns") team.spread = 1.5;
-          if (team.name === "ravens") team.spread = 16;
-          if (team.name === "chargers") team.spread = 15;
-          if (team.name === "pack") team.spread = 14;
-          if (team.name === "rams") team.spread = 13.5;
+          if (team.name === "bills") team.spread = "1";
+          if (team.name === "colts") team.spread = "8";
+          if (team.name === "titans") team.spread = "4";
+          if (team.name === "wash") team.spread = "4.5";
+          if (team.name === "eagles") team.spread = "3";
+          if (team.name === "browns") team.spread = "1.5";
+          if (team.name === "ravens") team.spread = "16";
+          if (team.name === "chargers") team.spread = "15";
+          if (team.name === "pack") team.spread = "14";
+          if (team.name === "rams") team.spread = "13.5";
 
           return team;
         });
@@ -386,22 +386,22 @@ describe("sort func", () => {
 
       it("sorts 16 teams correctly", () => {
         teams = teams.map((team) => {
-          if (team.name === "bills") team.spread = 1;
-          if (team.name === "colts") team.spread = 8;
-          if (team.name === "titans") team.spread = 4;
-          if (team.name === "wash") team.spread = 4.5;
-          if (team.name === "eagles") team.spread = 3;
-          if (team.name === "browns") team.spread = 1.5;
-          if (team.name === "ravens") team.spread = 16;
-          if (team.name === "chargers") team.spread = 15;
-          if (team.name === "pack") team.spread = 12;
-          if (team.name === "rams") team.spread = 13;
-          if (team.name === "chiefs") team.spread = 7;
-          if (team.name === "cards") team.spread = 14.5;
-          if (team.name === "bucs") team.spread = 11;
-          if (team.name === "pats") team.spread = 6;
-          if (team.name === "saints") team.spread = 14;
-          if (team.name === "vikings") team.spread = 13.5;
+          if (team.name === "bills") team.spread = "1";
+          if (team.name === "colts") team.spread = "8";
+          if (team.name === "titans") team.spread = "4";
+          if (team.name === "wash") team.spread = "4.5";
+          if (team.name === "eagles") team.spread = "3";
+          if (team.name === "browns") team.spread = "1.5";
+          if (team.name === "ravens") team.spread = "16";
+          if (team.name === "chargers") team.spread = "15";
+          if (team.name === "pack") team.spread = "12";
+          if (team.name === "rams") team.spread = "13";
+          if (team.name === "chiefs") team.spread = "7";
+          if (team.name === "cards") team.spread = "14.5";
+          if (team.name === "bucs") team.spread = "11";
+          if (team.name === "pats") team.spread = "6";
+          if (team.name === "saints") team.spread = "14";
+          if (team.name === "vikings") team.spread = "13.5";
 
           return team;
         });
@@ -464,11 +464,11 @@ describe("sort func", () => {
         teams = teams.filter((team) => teams2Find.includes(team.name));
 
         teams = teams.map((team) => {
-          if (team.name === "bills") team.spread = 1;
-          if (team.name === "colts") team.spread = 8;
-          if (team.name === "titans") team.spread = 4.5;
-          if (team.name === "wash") team.spread = 4.5;
-          if (team.name === "eagles") team.spread = 3;
+          if (team.name === "bills") team.spread = "1";
+          if (team.name === "colts") team.spread = "8";
+          if (team.name === "titans") team.spread = "4.5";
+          if (team.name === "wash") team.spread = "4.5";
+          if (team.name === "eagles") team.spread = "3";
 
           return team;
         });
@@ -505,16 +505,16 @@ describe("sort func", () => {
         teams = teams.filter((team) => teams2Find.includes(team.name));
 
         teams = teams.map((team) => {
-          if (team.name === "bills") team.spread = 1;
-          if (team.name === "colts") team.spread = 8;
-          if (team.name === "titans") team.spread = 3;
-          if (team.name === "wash") team.spread = 4.5;
-          if (team.name === "eagles") team.spread = 3;
-          if (team.name === "browns") team.spread = 1.5;
-          if (team.name === "ravens") team.spread = 16;
-          if (team.name === "chargers") team.spread = 15;
-          if (team.name === "pack") team.spread = 14;
-          if (team.name === "rams") team.spread = 13.5;
+          if (team.name === "bills") team.spread = "1";
+          if (team.name === "colts") team.spread = "8";
+          if (team.name === "titans") team.spread = "3";
+          if (team.name === "wash") team.spread = "4.5";
+          if (team.name === "eagles") team.spread = "3";
+          if (team.name === "browns") team.spread = "1.5";
+          if (team.name === "ravens") team.spread = "16";
+          if (team.name === "chargers") team.spread = "15";
+          if (team.name === "pack") team.spread = "14";
+          if (team.name === "rams") team.spread = "13.5";
 
           return team;
         });
@@ -541,22 +541,22 @@ describe("sort func", () => {
 
       it("sorts 16 teams correctly", () => {
         teams = teams.map((team) => {
-          if (team.name === "bills") team.spread = 1;
-          if (team.name === "colts") team.spread = 8;
-          if (team.name === "titans") team.spread = 4;
-          if (team.name === "wash") team.spread = 4;
-          if (team.name === "eagles") team.spread = 3;
-          if (team.name === "browns") team.spread = 1.5;
-          if (team.name === "ravens") team.spread = 16;
-          if (team.name === "chargers") team.spread = 15;
-          if (team.name === "pack") team.spread = 14;
-          if (team.name === "rams") team.spread = 13;
-          if (team.name === "chiefs") team.spread = 7;
-          if (team.name === "cards") team.spread = 14.5;
-          if (team.name === "bucs") team.spread = 11;
-          if (team.name === "pats") team.spread = 6;
-          if (team.name === "saints") team.spread = 14;
-          if (team.name === "vikings") team.spread = 13.5;
+          if (team.name === "bills") team.spread = "1";
+          if (team.name === "colts") team.spread = "8";
+          if (team.name === "titans") team.spread = "4";
+          if (team.name === "wash") team.spread = "4";
+          if (team.name === "eagles") team.spread = "3";
+          if (team.name === "browns") team.spread = "1.5";
+          if (team.name === "ravens") team.spread = "16";
+          if (team.name === "chargers") team.spread = "15";
+          if (team.name === "pack") team.spread = "14";
+          if (team.name === "rams") team.spread = "13";
+          if (team.name === "chiefs") team.spread = "7";
+          if (team.name === "cards") team.spread = "14.5";
+          if (team.name === "bucs") team.spread = "11";
+          if (team.name === "pats") team.spread = "6";
+          if (team.name === "saints") team.spread = "14";
+          if (team.name === "vikings") team.spread = "13.5";
 
           return team;
         });
@@ -597,15 +597,15 @@ describe("sort func", () => {
         teams = teams.filter((team) => teams2Find.includes(team.name));
 
         teams = teams.map((team) => {
-          if (team.name === "bills") team.spread = 8;
+          if (team.name === "bills") team.spread = "8";
 
           if (team.name === "colts") {
-            team.spread = 7;
+            team.spread = "7";
             team.locked = true;
             team.rank = 3;
           }
 
-          if (team.name === "titans") team.spread = 6;
+          if (team.name === "titans") team.spread = "6";
 
           return team;
         });
