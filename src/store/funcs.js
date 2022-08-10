@@ -46,38 +46,47 @@ const blankAuditFunc = (setObj) => {
 const randomizeSingleSpread = (arr) => {
   // console.log("randomizeSingleSpread arr", arr);
 
-  let rank = arr[0].rank;
-  // console.log("rank", rank);
+  const lockedAudit = arr.map((team) => team.locked);
 
-  let onTeam = 0;
+  if (lockedAudit.includes(false)) {
+    let rank = arr[0].rank;
 
-  const numOfTeams = arr.length;
+    arr.forEach((team) => {
+      if (team.rank > rank) rank = team.rank;
+    });
 
-  let counter = numOfTeams;
+    // console.log("rank", rank);
 
-  const randomizedObj = {};
+    let onTeam = 0;
 
-  while (counter > 0) {
-    let random = Math.ceil(Math.random() * numOfTeams);
+    const numOfTeams = arr.length;
 
-    if (!randomizedObj[random]) {
-      randomizedObj[random] = arr[onTeam].name;
-      counter--;
-      onTeam++;
+    let counter = numOfTeams;
+
+    const randomizedObj = {};
+
+    while (counter > 0) {
+      let random = Math.ceil(Math.random() * numOfTeams);
+
+      if (!randomizedObj[random]) {
+        randomizedObj[random] = arr[onTeam].name;
+        counter--;
+        onTeam++;
+      }
     }
+
+    // console.log("randomizedObj", randomizedObj);
+
+    arr = Object.values(randomizedObj).map((teamName) => {
+      teamName = arr.find((team) => team.name === teamName);
+
+      teamName.rank = rank;
+      rank--;
+      return teamName;
+    });
   }
 
-  // console.log("randomizedObj", randomizedObj);
-
-  arr = Object.values(randomizedObj).map((teamName) => {
-    teamName = arr.find((team) => team.name === teamName);
-
-    teamName.rank = rank;
-    rank--;
-    return teamName;
-  });
-
-  // console.log("newTeamOrder", arr);
+  // console.log("randomizeSingleSpread arr before return", arr);
 
   return arr;
 };
@@ -139,14 +148,14 @@ const sort = (arr) => {
     // console.log("lockedAudit is true in sort func");
 
     const numOfTeams = arr.length + 1;
-    console.log("numOfTeams", numOfTeams);
+    // console.log("numOfTeams", numOfTeams);
 
     const ranksUsed = [];
     const lockedTeams = arr.filter((team) => team.locked);
 
     lockedTeams.forEach((team) => ranksUsed.push(team.rank));
 
-    console.log("rankUsed for locked teams", ranksUsed);
+    // console.log("rankUsed for locked teams", ranksUsed);
 
     const unLockedTeams = arr
       .filter((team) => !team.locked)
@@ -161,11 +170,12 @@ const sort = (arr) => {
         return team;
       });
 
-    console.log("lockedTeams", lockedTeams);
-    console.log("unLockedTeams", unLockedTeams);
+    // console.log("lockedTeams", lockedTeams);
+    // console.log("unLockedTeams", unLockedTeams);
 
     arr = [...lockedTeams, ...unLockedTeams];
   } else {
+    // console.log("lockedAudit is false in sort func");
     arr = arr
       .sort((a, b) => b.spread - a.spread)
       .map((team) => {

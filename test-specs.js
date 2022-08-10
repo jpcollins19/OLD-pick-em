@@ -745,8 +745,6 @@ describe("sort func", () => {
 
         answer = sort(teams);
 
-        console.log("nugget", answer);
-
         lockedAudit = answer.map((user) => user.locked);
 
         expect(lockedAudit[0]).to.equal(true);
@@ -792,8 +790,6 @@ describe("sort func", () => {
         });
 
         answer = sort(teams);
-
-        console.log("nugget", answer);
 
         lockedAudit = answer.map((user) => user.locked);
 
@@ -1093,184 +1089,568 @@ describe("sort func", () => {
     });
 
     describe("w/ dupe spreads", () => {
-      // it("sorts 3 teams correctly", () => {
-      //   teams2Find = ["bills", "colts", "titans"];
+      describe("sorts 3 teams correctly", () => {
+        beforeEach(() => {
+          teams2Find = ["bills", "colts", "titans"];
 
-      //   teams = teams.filter((team) => teams2Find.includes(team.name));
+          teams = teams.filter((team) => teams2Find.includes(team.name));
+        });
 
-      //   teams = teams.map((team) => {
-      //     if (team.name === "bills") team.spread = "8";
+        it("dupe spreads are locked", () => {
+          teams = teams.map((team) => {
+            if (team.name === "bills") team.spread = "8";
 
-      //     if (team.name === "colts") {
-      //       team.spread = "7";
-      //       team.locked = true;
-      //       team.rank = 3;
-      //     }
+            if (team.name === "colts") {
+              team.spread = "7";
+              team.locked = true;
+              team.rank = 2;
+            }
 
-      //     if (team.name === "titans") team.spread = "6";
+            if (team.name === "titans") {
+              team.spread = "7";
+              team.locked = true;
+              team.rank = 1;
+            }
 
-      //     return team;
-      //   });
+            return team;
+          });
 
-      //   answer = sort(teams);
+          answer = sort(teams);
 
-      //   lockedAudit = answer.map((user) => user.locked);
+          teams2Audit = ["colts", "titans"];
 
-      //   expect(lockedAudit[0]).to.equal(false);
-      //   expect(lockedAudit[1]).to.equal(false);
-      //   expect(lockedAudit[2]).to.equal(true);
+          lockedAudit = answer.map((user) => user.locked);
 
-      //   expect(answer[0].name).to.equal("bills");
-      //   expect(answer[1].name).to.equal("titans");
-      //   expect(answer[2].name).to.equal("colts");
+          expect(lockedAudit[0]).to.equal(false);
+          expect(lockedAudit[1]).to.equal(true);
+          expect(lockedAudit[2]).to.equal(true);
 
-      //   expect(answer[0].rank).to.equal(3);
-      //   expect(answer[1].rank).to.equal(2);
-      //   expect(answer[2].rank).to.equal(1);
-      // });
+          expect(answer[0].name).to.equal("bills");
+          expect(answer[1].name).to.equal("colts");
+          expect(answer[2].name).to.equal("titans");
 
-      {
-      }
+          expect(answer[0].rank).to.equal(3);
+          expect(answer[1].rank).to.equal(2);
+          expect(answer[2].rank).to.equal(1);
+        });
 
-      // it("sorts 5 teams correctly", () => {
-      //   teams2Find = ["bills", "colts", "titans", "wash", "eagles"];
+        it("dupe spreads are not locked, locked spread is not in between, locked is ranked last", () => {
+          teams = teams.map((team) => {
+            if (team.name === "bills") team.spread = "8";
+            if (team.name === "titans") team.spread = "8";
 
-      //   teams = teams.filter((team) => teams2Find.includes(team.name));
+            if (team.name === "colts") {
+              team.spread = "7";
+              team.locked = true;
+              team.rank = 1;
+            }
 
-      //   teams = teams.map((team) => {
-      //     if (team.name === "bills") team.spread = "2";
+            return team;
+          });
 
-      //     if (team.name === "colts") {
-      //       team.spread = "7";
-      //       team.locked = true;
-      //       team.rank = 1;
-      //     }
+          answer = sort(teams);
 
-      //     if (team.name === "titans") {
-      //       team.spread = "9";
-      //       team.locked = true;
-      //       team.rank = 4;
-      //     }
+          teams2Audit = ["bills", "titans"];
 
-      //     if (team.name === "wash") team.spread = "14";
-      //     if (team.name === "eagles") team.spread = "14.5";
+          lockedAudit = answer.map((user) => user.locked);
 
-      //     return team;
-      //   });
+          expect(lockedAudit[0]).to.equal(false);
+          expect(lockedAudit[1]).to.equal(false);
+          expect(lockedAudit[2]).to.equal(true);
 
-      //   answer = sort(teams);
+          expect(teams2Audit.includes(answer[0].name)).to.equal(true);
+          expect(teams2Audit.includes(answer[1].name)).to.equal(true);
+          expect(answer[2].name).to.equal("colts");
 
-      //   lockedAudit = answer.map((user) => user.locked);
+          expect(answer[0].rank).to.equal(3);
+          expect(answer[1].rank).to.equal(2);
+          expect(answer[2].rank).to.equal(1);
+        });
 
-      //   expect(lockedAudit[0]).to.equal(false);
-      //   expect(lockedAudit[1]).to.equal(true);
-      //   expect(lockedAudit[2]).to.equal(false);
-      //   expect(lockedAudit[3]).to.equal(false);
-      //   expect(lockedAudit[4]).to.equal(true);
+        it("dupe spreads are not locked, locked spread is not in between, locked is ranked first", () => {
+          teams = teams.map((team) => {
+            if (team.name === "bills") team.spread = "8";
+            if (team.name === "titans") team.spread = "8";
 
-      //   expect(answer[0].name).to.equal("eagles");
-      //   expect(answer[1].name).to.equal("titans");
-      //   expect(answer[2].name).to.equal("wash");
-      //   expect(answer[3].name).to.equal("bills");
-      //   expect(answer[4].name).to.equal("colts");
+            if (team.name === "colts") {
+              team.spread = "7";
+              team.locked = true;
+              team.rank = 3;
+            }
 
-      //   expect(answer[0].rank).to.equal(5);
-      //   expect(answer[1].rank).to.equal(4);
-      //   expect(answer[2].rank).to.equal(3);
-      //   expect(answer[3].rank).to.equal(2);
-      //   expect(answer[4].rank).to.equal(1);
-      // });
+            return team;
+          });
 
-      {
-      }
+          answer = sort(teams);
 
-      // it("sorts 10 teams correctly", () => {
-      //   teams2Find = [
-      //     "bills",
-      //     "colts",
-      //     "titans",
-      //     "wash",
-      //     "eagles",
-      //     "browns",
-      //     "ravens",
-      //     "chargers",
-      //     "pack",
-      //     "rams",
-      //   ];
+          teams2Audit = ["bills", "titans"];
 
-      //   teams = teams.filter((team) => teams2Find.includes(team.name));
+          lockedAudit = answer.map((user) => user.locked);
 
-      //   teams = teams.map((team) => {
-      //     if (team.name === "bills") team.spread = "5";
+          expect(lockedAudit[0]).to.equal(true);
+          expect(lockedAudit[1]).to.equal(false);
+          expect(lockedAudit[2]).to.equal(false);
 
-      //     if (team.name === "colts") team.spread = "7.5";
+          expect(answer[0].name).to.equal("colts");
+          expect(teams2Audit.includes(answer[1].name)).to.equal(true);
+          expect(teams2Audit.includes(answer[2].name)).to.equal(true);
 
-      //     if (team.name === "titans") {
-      //       team.spread = "10";
-      //       team.locked = true;
-      //       team.rank = 8;
-      //     }
+          expect(answer[0].rank).to.equal(3);
+          expect(answer[1].rank).to.equal(2);
+          expect(answer[2].rank).to.equal(1);
+        });
 
-      //     if (team.name === "wash") team.spread = "9";
-      //     if (team.name === "eagles") team.spread = "14.5";
+        it("dupe spreads are not locked, locked spread is in between, locked is ranked last", () => {
+          teams = teams.map((team) => {
+            if (team.name === "bills") team.spread = "8";
 
-      //     if (team.name === "browns") {
-      //       team.spread = "20";
-      //       team.locked = true;
-      //       team.rank = 3;
-      //     }
+            if (team.name === "colts") {
+              team.spread = "7";
+              team.locked = true;
+              team.rank = 1;
+            }
 
-      //     if (team.name === "ravens") team.spread = "11";
-      //     if (team.name === "chargers") team.spread = "16";
+            if (team.name === "titans") team.spread = "8";
 
-      //     if (team.name === "pack") {
-      //       team.spread = "6";
-      //       team.locked = true;
-      //       team.rank = 1;
-      //     }
+            return team;
+          });
 
-      //     if (team.name === "rams") team.spread = "1";
+          answer = sort(teams);
 
-      //     return team;
-      //   });
+          teams2Audit = ["bills", "titans"];
 
-      //   answer = sort(teams);
+          lockedAudit = answer.map((user) => user.locked);
 
-      //   lockedAudit = answer.map((user) => user.locked);
+          expect(lockedAudit[0]).to.equal(false);
+          expect(lockedAudit[1]).to.equal(false);
+          expect(lockedAudit[2]).to.equal(true);
 
-      //   expect(lockedAudit[0]).to.equal(false);
-      //   expect(lockedAudit[1]).to.equal(false);
-      //   expect(lockedAudit[2]).to.equal(true);
-      //   expect(lockedAudit[3]).to.equal(false);
-      //   expect(lockedAudit[4]).to.equal(false);
-      //   expect(lockedAudit[5]).to.equal(false);
-      //   expect(lockedAudit[6]).to.equal(false);
-      //   expect(lockedAudit[7]).to.equal(true);
-      //   expect(lockedAudit[8]).to.equal(false);
-      //   expect(lockedAudit[9]).to.equal(true);
+          expect(teams2Audit.includes(answer[0].name)).to.equal(true);
+          expect(teams2Audit.includes(answer[1].name)).to.equal(true);
+          expect(answer[2].name).to.equal("colts");
 
-      //   expect(answer[0].name).to.equal("chargers");
-      //   expect(answer[1].name).to.equal("eagles");
-      //   expect(answer[2].name).to.equal("titans");
-      //   expect(answer[3].name).to.equal("ravens");
-      //   expect(answer[4].name).to.equal("wash");
-      //   expect(answer[5].name).to.equal("colts");
-      //   expect(answer[6].name).to.equal("bills");
-      //   expect(answer[7].name).to.equal("browns");
-      //   expect(answer[8].name).to.equal("rams");
-      //   expect(answer[9].name).to.equal("pack");
+          expect(answer[0].rank).to.equal(3);
+          expect(answer[1].rank).to.equal(2);
+          expect(answer[2].rank).to.equal(1);
+        });
 
-      //   expect(answer[0].rank).to.equal(10);
-      //   expect(answer[1].rank).to.equal(9);
-      //   expect(answer[2].rank).to.equal(8);
-      //   expect(answer[3].rank).to.equal(7);
-      //   expect(answer[4].rank).to.equal(6);
-      //   expect(answer[5].rank).to.equal(5);
-      //   expect(answer[6].rank).to.equal(4);
-      //   expect(answer[7].rank).to.equal(3);
-      //   expect(answer[8].rank).to.equal(2);
-      //   expect(answer[9].rank).to.equal(1);
-      // });
+        it("dupe spreads are not locked, locked spread is in between, locked is ranked first", () => {
+          teams = teams.map((team) => {
+            if (team.name === "bills") team.spread = "8";
+
+            if (team.name === "colts") {
+              team.spread = "7";
+              team.locked = true;
+              team.rank = 3;
+            }
+
+            if (team.name === "titans") team.spread = "8";
+
+            return team;
+          });
+
+          answer = sort(teams);
+
+          teams2Audit = ["bills", "titans"];
+
+          lockedAudit = answer.map((user) => user.locked);
+
+          expect(lockedAudit[0]).to.equal(true);
+          expect(lockedAudit[1]).to.equal(false);
+          expect(lockedAudit[2]).to.equal(false);
+
+          expect(answer[0].name).to.equal("colts");
+          expect(teams2Audit.includes(answer[1].name)).to.equal(true);
+          expect(teams2Audit.includes(answer[2].name)).to.equal(true);
+
+          expect(answer[0].rank).to.equal(3);
+          expect(answer[1].rank).to.equal(2);
+          expect(answer[2].rank).to.equal(1);
+        });
+      });
+
+      describe("sorts 5 teams correctly", () => {
+        beforeEach(() => {
+          teams2Find = ["bills", "colts", "titans", "pack", "ravens"];
+
+          teams = teams.filter((team) => teams2Find.includes(team.name));
+        });
+
+        it("dupe spreads are locked", () => {
+          teams = teams.map((team) => {
+            if (team.name === "bills") team.spread = "7.5";
+
+            if (team.name === "colts") {
+              team.spread = "8";
+              team.locked = true;
+              team.rank = 3;
+            }
+
+            if (team.name === "titans") {
+              team.spread = "8";
+              team.locked = true;
+              team.rank = 1;
+            }
+
+            if (team.name === "pack") team.spread = "10";
+            if (team.name === "ravens") team.spread = "6";
+
+            return team;
+          });
+
+          answer = sort(teams);
+
+          teams2Audit = ["colts", "titans"];
+
+          lockedAudit = answer.map((user) => user.locked);
+
+          expect(lockedAudit[0]).to.equal(false);
+          expect(lockedAudit[1]).to.equal(false);
+          expect(lockedAudit[2]).to.equal(true);
+          expect(lockedAudit[3]).to.equal(false);
+          expect(lockedAudit[4]).to.equal(true);
+
+          expect(answer[0].name).to.equal("pack");
+          expect(answer[1].name).to.equal("bills");
+          expect(answer[2].name).to.equal("colts");
+          expect(answer[3].name).to.equal("ravens");
+          expect(answer[4].name).to.equal("titans");
+
+          expect(answer[0].rank).to.equal(5);
+          expect(answer[1].rank).to.equal(4);
+          expect(answer[2].rank).to.equal(3);
+          expect(answer[3].rank).to.equal(2);
+          expect(answer[4].rank).to.equal(1);
+        });
+
+        it("dupe spreads are not locked, locked spread is not in between, locked is ranked last", () => {
+          teams = teams.map((team) => {
+            if (team.name === "bills") {
+              team.spread = "8";
+              team.locked = true;
+              team.rank = 1;
+            }
+
+            if (team.name === "colts") team.spread = "7.5";
+            if (team.name === "titans") team.spread = "7.5";
+
+            if (team.name === "pack") team.spread = "10";
+            if (team.name === "ravens") team.spread = "10";
+
+            return team;
+          });
+
+          answer = sort(teams);
+
+          teams2Audit = ["colts", "titans", "pack", "ravens"];
+
+          lockedAudit = answer.map((user) => user.locked);
+
+          expect(lockedAudit[0]).to.equal(false);
+          expect(lockedAudit[1]).to.equal(false);
+          expect(lockedAudit[2]).to.equal(false);
+          expect(lockedAudit[3]).to.equal(false);
+          expect(lockedAudit[4]).to.equal(true);
+
+          expect(teams2Audit.includes(answer[0].name)).to.equal(true);
+          expect(teams2Audit.includes(answer[1].name)).to.equal(true);
+          expect(teams2Audit.includes(answer[2].name)).to.equal(true);
+          expect(teams2Audit.includes(answer[3].name)).to.equal(true);
+          expect(answer[4].name).to.equal("bills");
+
+          expect(answer[0].rank).to.equal(5);
+          expect(answer[1].rank).to.equal(4);
+          expect(answer[2].rank).to.equal(3);
+          expect(answer[3].rank).to.equal(2);
+          expect(answer[4].rank).to.equal(1);
+        });
+
+        it("dupe spreads are not locked, locked spread is not in between, locked is ranked first", () => {
+          teams = teams.map((team) => {
+            if (team.name === "bills") {
+              team.spread = "8";
+              team.locked = true;
+              team.rank = 5;
+            }
+
+            if (team.name === "colts") team.spread = "7";
+            if (team.name === "titans") team.spread = "7.5";
+
+            if (team.name === "pack") team.spread = "10";
+            if (team.name === "ravens") team.spread = "10";
+
+            return team;
+          });
+
+          answer = sort(teams);
+
+          teams2Audit = ["pack", "ravens"];
+
+          lockedAudit = answer.map((user) => user.locked);
+
+          expect(lockedAudit[0]).to.equal(true);
+          expect(lockedAudit[1]).to.equal(false);
+          expect(lockedAudit[2]).to.equal(false);
+          expect(lockedAudit[3]).to.equal(false);
+          expect(lockedAudit[4]).to.equal(false);
+
+          expect(answer[0].name).to.equal("bills");
+          expect(teams2Audit.includes(answer[1].name)).to.equal(true);
+          expect(teams2Audit.includes(answer[2].name)).to.equal(true);
+          expect(answer[3].name).to.equal("titans");
+          expect(answer[4].name).to.equal("colts");
+
+          expect(answer[0].rank).to.equal(5);
+          expect(answer[1].rank).to.equal(4);
+          expect(answer[2].rank).to.equal(3);
+          expect(answer[3].rank).to.equal(2);
+          expect(answer[4].rank).to.equal(1);
+        });
+
+        it("dupe spreads are not locked, locked spread is in between, locked is ranked last", () => {
+          teams = teams.map((team) => {
+            if (team.name === "bills") team.spread = "16";
+
+            if (team.name === "colts") {
+              team.spread = "14";
+              team.locked = true;
+              team.rank = 1;
+            }
+
+            if (team.name === "titans") team.spread = "13.5";
+            if (team.name === "pack") team.spread = "10";
+            if (team.name === "ravens") team.spread = "10";
+
+            return team;
+          });
+
+          answer = sort(teams);
+
+          teams2Audit = ["pack", "ravens"];
+
+          lockedAudit = answer.map((user) => user.locked);
+
+          expect(lockedAudit[0]).to.equal(false);
+          expect(lockedAudit[1]).to.equal(false);
+          expect(lockedAudit[2]).to.equal(false);
+          expect(lockedAudit[3]).to.equal(false);
+          expect(lockedAudit[4]).to.equal(true);
+
+          expect(answer[0].name).to.equal("bills");
+          expect(answer[1].name).to.equal("titans");
+          expect(teams2Audit.includes(answer[2].name)).to.equal(true);
+          expect(teams2Audit.includes(answer[3].name)).to.equal(true);
+          expect(answer[4].name).to.equal("colts");
+
+          expect(answer[0].rank).to.equal(5);
+          expect(answer[1].rank).to.equal(4);
+          expect(answer[2].rank).to.equal(3);
+          expect(answer[3].rank).to.equal(2);
+          expect(answer[4].rank).to.equal(1);
+        });
+
+        it("dupe spreads are not locked, locked spread is in between, locked is ranked first", () => {
+          teams = teams.map((team) => {
+            if (team.name === "bills") team.spread = "16";
+            if (team.name === "colts") team.spread = "10";
+            if (team.name === "titans") team.spread = "13.5";
+
+            if (team.name === "pack") {
+              team.spread = "14";
+              team.locked = true;
+              team.rank = 5;
+            }
+
+            if (team.name === "ravens") team.spread = "13.5";
+
+            return team;
+          });
+
+          answer = sort(teams);
+
+          //pack, bills, titans/ravens, colts
+
+          teams2Audit = ["titans", "ravens"];
+
+          lockedAudit = answer.map((user) => user.locked);
+
+          expect(lockedAudit[0]).to.equal(true);
+          expect(lockedAudit[1]).to.equal(false);
+          expect(lockedAudit[2]).to.equal(false);
+          expect(lockedAudit[3]).to.equal(false);
+          expect(lockedAudit[4]).to.equal(false);
+
+          expect(answer[0].name).to.equal("pack");
+          expect(answer[1].name).to.equal("bills");
+          expect(teams2Audit.includes(answer[2].name)).to.equal(true);
+          expect(teams2Audit.includes(answer[3].name)).to.equal(true);
+          expect(answer[4].name).to.equal("colts");
+
+          expect(answer[0].rank).to.equal(5);
+          expect(answer[1].rank).to.equal(4);
+          expect(answer[2].rank).to.equal(3);
+          expect(answer[3].rank).to.equal(2);
+          expect(answer[4].rank).to.equal(1);
+        });
+      });
+
+      describe("sorts 10 teams correctly", () => {
+        beforeEach(() => {
+          teams2Find = [
+            "bills",
+            "colts",
+            "titans",
+            "wash",
+            "eagles",
+            "browns",
+            "ravens",
+            "chargers",
+            "pack",
+            "rams",
+          ];
+
+          teams = teams.filter((team) => teams2Find.includes(team.name));
+        });
+
+        it("dupe spreads are locked", () => {
+          teams = teams.map((team) => {
+            if (team.name === "bills") team.spread = "7.5";
+
+            if (team.name === "colts") {
+              team.spread = "6.5";
+              team.locked = true;
+              team.rank = 3;
+            }
+
+            if (team.name === "titans") {
+              team.spread = "6.5";
+              team.locked = true;
+              team.rank = 1;
+            }
+
+            if (team.name === "wash") team.spread = "18";
+            if (team.name === "eagles") team.spread = "11.5";
+            if (team.name === "browns") team.spread = "14";
+
+            if (team.name === "ravens") {
+              team.spread = "8";
+              team.locked = true;
+              team.rank = 10;
+            }
+
+            if (team.name === "chargers") {
+              team.spread = "8";
+              team.locked = true;
+              team.rank = 7;
+            }
+
+            if (team.name === "pack") team.spread = "10";
+            if (team.name === "rams") team.spread = "2";
+
+            return team;
+          });
+
+          answer = sort(teams);
+
+          lockedAudit = answer.map((user) => user.locked);
+
+          expect(lockedAudit[0]).to.equal(true);
+          expect(lockedAudit[1]).to.equal(false);
+          expect(lockedAudit[2]).to.equal(false);
+          expect(lockedAudit[3]).to.equal(true);
+          expect(lockedAudit[4]).to.equal(false);
+          expect(lockedAudit[5]).to.equal(false);
+          expect(lockedAudit[6]).to.equal(false);
+          expect(lockedAudit[7]).to.equal(true);
+          expect(lockedAudit[8]).to.equal(false);
+          expect(lockedAudit[9]).to.equal(true);
+
+          expect(answer[0].name).to.equal("ravens");
+          expect(answer[1].name).to.equal("wash");
+          expect(answer[2].name).to.equal("browns");
+          expect(answer[3].name).to.equal("chargers");
+          expect(answer[4].name).to.equal("eagles");
+          expect(answer[5].name).to.equal("pack");
+          expect(answer[6].name).to.equal("bills");
+          expect(answer[7].name).to.equal("colts");
+          expect(answer[8].name).to.equal("rams");
+          expect(answer[9].name).to.equal("titans");
+
+          expect(answer[0].rank).to.equal(10);
+          expect(answer[1].rank).to.equal(9);
+          expect(answer[2].rank).to.equal(8);
+          expect(answer[3].rank).to.equal(7);
+          expect(answer[4].rank).to.equal(6);
+          expect(answer[5].rank).to.equal(5);
+          expect(answer[6].rank).to.equal(4);
+          expect(answer[7].rank).to.equal(3);
+          expect(answer[8].rank).to.equal(2);
+          expect(answer[9].rank).to.equal(1);
+        });
+
+        it("dupe spreads are not locked, locked spread is not in between, locked is ranked last", () => {
+          teams = teams.map((team) => {
+            if (team.name === "bills") {
+              team.spread = "6.5";
+              team.locked = true;
+              team.rank = 1;
+            }
+
+            if (team.name === "colts") team.spread = "10";
+            if (team.name === "titans") team.spread = "5.5";
+            if (team.name === "wash") team.spread = "6";
+            if (team.name === "eagles") team.spread = "9.5";
+            if (team.name === "browns") team.spread = "7";
+            if (team.name === "ravens") team.spread = "2";
+            if (team.name === "chargers") team.spread = "9";
+            if (team.name === "pack") team.spread = "8.5";
+            if (team.name === "rams") team.spread = "8";
+
+            return team;
+          });
+
+          //colts, eagles, chargers, pack, rams, browns, wash, titans, ravens
+
+          answer = sort(teams);
+
+          teams2Audit = ["colts", "titans", "pack", "ravens"];
+
+          lockedAudit = answer.map((user) => user.locked);
+
+          expect(lockedAudit[0]).to.equal(false);
+          expect(lockedAudit[1]).to.equal(false);
+          expect(lockedAudit[2]).to.equal(false);
+          expect(lockedAudit[3]).to.equal(false);
+          expect(lockedAudit[4]).to.equal(false);
+          expect(lockedAudit[5]).to.equal(false);
+          expect(lockedAudit[6]).to.equal(false);
+          expect(lockedAudit[7]).to.equal(false);
+          expect(lockedAudit[8]).to.equal(false);
+          expect(lockedAudit[9]).to.equal(true);
+
+          expect(answer[0].name).to.equal("colts");
+          expect(answer[1].name).to.equal("eagles");
+          expect(answer[2].name).to.equal("chargers");
+          expect(answer[3].name).to.equal("pack");
+          expect(answer[4].name).to.equal("rams");
+          expect(answer[5].name).to.equal("browns");
+          expect(answer[6].name).to.equal("wash");
+          expect(answer[7].name).to.equal("titans");
+          expect(answer[8].name).to.equal("ravens");
+          expect(answer[9].name).to.equal("bills");
+
+          expect(answer[0].rank).to.equal(10);
+          expect(answer[1].rank).to.equal(9);
+          expect(answer[2].rank).to.equal(8);
+          expect(answer[3].rank).to.equal(7);
+          expect(answer[4].rank).to.equal(6);
+          expect(answer[5].rank).to.equal(5);
+          expect(answer[6].rank).to.equal(4);
+          expect(answer[7].rank).to.equal(3);
+          expect(answer[8].rank).to.equal(2);
+          expect(answer[9].rank).to.equal(1);
+        });
+      });
 
       {
       }
