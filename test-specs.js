@@ -648,7 +648,7 @@ describe("sort func", () => {
           if (team.name === "colts") {
             team.spread = "7";
             team.locked = true;
-            team.rank = 3;
+            team.rank = 1;
           }
 
           if (team.name === "titans") team.spread = "6";
@@ -701,8 +701,6 @@ describe("sort func", () => {
 
         answer = sort(teams);
 
-        console.log("nugget", answer);
-
         lockedAudit = answer.map((user) => user.locked);
 
         expect(lockedAudit[0]).to.equal(false);
@@ -724,203 +722,196 @@ describe("sort func", () => {
         expect(answer[4].rank).to.equal(1);
       });
 
-      // it("sorts 6 teams correctly, first team = locked & listed highest rank", () => {
-      //   teams2Find = ["chiefs", "titans", "bucs", "ravens", "pack", "pats"];
+      it("sorts 6 teams correctly, first team = locked & listed highest rank", () => {
+        teams2Find = ["chiefs", "titans", "bucs", "ravens", "pack", "pats"];
 
-      //   teams = teams.filter((team) => teams2Find.includes(team.name));
+        teams = teams.filter((team) => teams2Find.includes(team.name));
 
-      //   teams = teams.map((team) => {
-      //     if (team.name === "chiefs") {
-      //       team.spread = "3";
-      //       team.locked = true;
-      //       team.rank = 6;
-      //     }
+        teams = teams.map((team) => {
+          if (team.name === "chiefs") {
+            team.spread = "3";
+            team.locked = true;
+            team.rank = 6;
+          }
 
-      //     if (team.name === "titans") team.spread = "5";
-      //     if (team.name === "bucs") team.spread = "1";
-      //     if (team.name === "ravens") team.spread = "1.5";
-      //     if (team.name === "pack") team.spread = "10";
-      //     if (team.name === "pats") team.spread = "4";
+          if (team.name === "titans") team.spread = "5";
+          if (team.name === "bucs") team.spread = "1";
+          if (team.name === "ravens") team.spread = "1.5";
+          if (team.name === "pack") team.spread = "10";
+          if (team.name === "pats") team.spread = "4";
 
-      //     return team;
-      //   });
+          return team;
+        });
 
-      //   answer = sort(teams);
+        answer = sort(teams);
 
-      //   console.log("nugget", answer);
+        console.log("nugget", answer);
 
-      //   lockedAudit = answer.map((user) => user.locked);
+        lockedAudit = answer.map((user) => user.locked);
 
-      //   expect(lockedAudit[0]).to.equal(true);
-      //   expect(lockedAudit[1]).to.equal(false);
-      //   expect(lockedAudit[2]).to.equal(false);
-      //   expect(lockedAudit[3]).to.equal(false);
-      //   expect(lockedAudit[4]).to.equal(false);
+        expect(lockedAudit[0]).to.equal(true);
+        expect(lockedAudit[1]).to.equal(false);
+        expect(lockedAudit[2]).to.equal(false);
+        expect(lockedAudit[3]).to.equal(false);
+        expect(lockedAudit[4]).to.equal(false);
 
-      //   expect(answer[0].name).to.equal("chiefs");
-      //   expect(answer[1].name).to.equal("pack");
-      //   expect(answer[2].name).to.equal("titans");
-      //   expect(answer[3].name).to.equal("pats");
-      //   expect(answer[4].name).to.equal("ravens");
-      //   expect(answer[5].name).to.equal("bucs");
+        expect(answer[0].name).to.equal("chiefs");
+        expect(answer[1].name).to.equal("pack");
+        expect(answer[2].name).to.equal("titans");
+        expect(answer[3].name).to.equal("pats");
+        expect(answer[4].name).to.equal("ravens");
+        expect(answer[5].name).to.equal("bucs");
 
-      //   expect(answer[0].rank).to.equal(6);
-      //   expect(answer[1].rank).to.equal(5);
-      //   expect(answer[2].rank).to.equal(4);
-      //   expect(answer[3].rank).to.equal(3);
-      //   expect(answer[4].rank).to.equal(2);
-      //   expect(answer[5].rank).to.equal(1);
-      // });
+        expect(answer[0].rank).to.equal(6);
+        expect(answer[1].rank).to.equal(5);
+        expect(answer[2].rank).to.equal(4);
+        expect(answer[3].rank).to.equal(3);
+        expect(answer[4].rank).to.equal(2);
+        expect(answer[5].rank).to.equal(1);
+      });
 
-      {
-      }
+      it("sorts 6 teams correctly, first team = locked & listed lowest rank", () => {
+        teams2Find = ["chiefs", "titans", "bucs", "ravens", "pack", "pats"];
 
-      // it("sorts 6 teams correctly, first team = locked & listed lowest rank", () => {
-      //   teams2Find = ["chiefs", "titans", "bucs", "ravens", "pack", "pats"];
+        teams = teams.filter((team) => teams2Find.includes(team.name));
 
-      //   teams = teams.filter((team) => teams2Find.includes(team.name));
+        teams = teams.map((team) => {
+          if (team.name === "chiefs") {
+            team.spread = "3";
+            team.locked = true;
+            team.rank = 1;
+          }
 
-      //   teams = teams.map((team) => {
-      //     if (team.name === "chiefs") {
-      //       team.spread = "3";
-      //       team.locked = true;
-      //       team.rank = 1;
-      //     }
+          if (team.name === "titans") team.spread = "5";
+          if (team.name === "bucs") team.spread = "1";
+          if (team.name === "ravens") team.spread = "1.5";
+          if (team.name === "pack") team.spread = "10";
+          if (team.name === "pats") team.spread = "4";
 
-      //     if (team.name === "titans") team.spread = "5";
-      //     if (team.name === "bucs") team.spread = "1";
-      //     if (team.name === "ravens") team.spread = "1.5";
-      //     if (team.name === "pack") team.spread = "10";
-      //     if (team.name === "pats") team.spread = "4";
+          return team;
+        });
 
-      //     return team;
-      //   });
+        answer = sort(teams);
 
-      //   answer = sort(teams);
+        console.log("nugget", answer);
 
-      //   lockedAudit = answer.map((user) => user.locked);
+        lockedAudit = answer.map((user) => user.locked);
 
-      //   expect(lockedAudit[0]).to.equal(false);
-      //   expect(lockedAudit[1]).to.equal(false);
-      //   expect(lockedAudit[2]).to.equal(false);
-      //   expect(lockedAudit[3]).to.equal(false);
-      //   expect(lockedAudit[4]).to.equal(true);
+        expect(lockedAudit[0]).to.equal(false);
+        expect(lockedAudit[1]).to.equal(false);
+        expect(lockedAudit[2]).to.equal(false);
+        expect(lockedAudit[3]).to.equal(false);
+        expect(lockedAudit[4]).to.equal(false);
+        expect(lockedAudit[5]).to.equal(true);
 
-      //   expect(answer[0].name).to.equal("pack");
-      //   expect(answer[1].name).to.equal("titans");
-      //   expect(answer[2].name).to.equal("pats");
-      //   expect(answer[3].name).to.equal("ravens");
-      //   expect(answer[4].name).to.equal("bucs");
-      //   expect(answer[5].name).to.equal("chiefs");
+        expect(answer[0].name).to.equal("pack");
+        expect(answer[1].name).to.equal("titans");
+        expect(answer[2].name).to.equal("pats");
+        expect(answer[3].name).to.equal("ravens");
+        expect(answer[4].name).to.equal("bucs");
+        expect(answer[5].name).to.equal("chiefs");
 
-      //   expect(answer[0].rank).to.equal(6);
-      //   expect(answer[1].rank).to.equal(5);
-      //   expect(answer[2].rank).to.equal(4);
-      //   expect(answer[3].rank).to.equal(3);
-      //   expect(answer[4].rank).to.equal(2);
-      //   expect(answer[5].rank).to.equal(1);
-      // });
+        expect(answer[0].rank).to.equal(6);
+        expect(answer[1].rank).to.equal(5);
+        expect(answer[2].rank).to.equal(4);
+        expect(answer[3].rank).to.equal(3);
+        expect(answer[4].rank).to.equal(2);
+        expect(answer[5].rank).to.equal(1);
+      });
 
-      {
-      }
+      it("sorts 6 teams correctly, last team = locked & listed highest rank", () => {
+        teams2Find = ["chiefs", "titans", "bucs", "ravens", "pack", "pats"];
 
-      // it("sorts 6 teams correctly, last team = locked & listed highest rank", () => {
-      //   teams2Find = ["chiefs", "titans", "bucs", "ravens", "pack", "pats"];
+        teams = teams.filter((team) => teams2Find.includes(team.name));
 
-      //   teams = teams.filter((team) => teams2Find.includes(team.name));
+        teams = teams.map((team) => {
+          if (team.name === "chiefs") team.spread = "6";
+          if (team.name === "titans") team.spread = "5";
+          if (team.name === "bucs") team.spread = "1";
+          if (team.name === "ravens") team.spread = "1.5";
+          if (team.name === "pack") team.spread = "10";
 
-      //   teams = teams.map((team) => {
-      //     if (team.name === "chiefs") team.spread = "6";
-      //     if (team.name === "titans") team.spread = "5";
-      //     if (team.name === "bucs") team.spread = "1";
-      //     if (team.name === "ravens") team.spread = "1.5";
-      //     if (team.name === "pack") team.spread = "10";
+          if (team.name === "pats") {
+            team.spread = "3";
+            team.locked = true;
+            team.rank = 6;
+          }
 
-      //     if (team.name === "pats") {
-      //       team.spread = "3";
-      //       team.locked = true;
-      //       team.rank = 6;
-      //     }
+          return team;
+        });
 
-      //     return team;
-      //   });
+        answer = sort(teams);
 
-      //   answer = sort(teams);
+        lockedAudit = answer.map((user) => user.locked);
 
-      //   lockedAudit = answer.map((user) => user.locked);
+        expect(lockedAudit[0]).to.equal(true);
+        expect(lockedAudit[1]).to.equal(false);
+        expect(lockedAudit[2]).to.equal(false);
+        expect(lockedAudit[3]).to.equal(false);
+        expect(lockedAudit[4]).to.equal(false);
+        expect(lockedAudit[5]).to.equal(false);
 
-      //   expect(lockedAudit[0]).to.equal(true);
-      //   expect(lockedAudit[1]).to.equal(false);
-      //   expect(lockedAudit[2]).to.equal(false);
-      //   expect(lockedAudit[3]).to.equal(false);
-      //   expect(lockedAudit[4]).to.equal(false);
+        expect(answer[0].name).to.equal("pats");
+        expect(answer[1].name).to.equal("pack");
+        expect(answer[2].name).to.equal("chiefs");
+        expect(answer[3].name).to.equal("titans");
+        expect(answer[4].name).to.equal("ravens");
+        expect(answer[5].name).to.equal("bucs");
 
-      //   expect(answer[0].name).to.equal("pats");
-      //   expect(answer[1].name).to.equal("pack");
-      //   expect(answer[2].name).to.equal("chiefs");
-      //   expect(answer[3].name).to.equal("titans");
-      //   expect(answer[4].name).to.equal("ravens");
-      //   expect(answer[5].name).to.equal("bucs");
+        expect(answer[0].rank).to.equal(6);
+        expect(answer[1].rank).to.equal(5);
+        expect(answer[2].rank).to.equal(4);
+        expect(answer[3].rank).to.equal(3);
+        expect(answer[4].rank).to.equal(2);
+        expect(answer[5].rank).to.equal(1);
+      });
 
-      //   expect(answer[0].rank).to.equal(6);
-      //   expect(answer[1].rank).to.equal(5);
-      //   expect(answer[2].rank).to.equal(4);
-      //   expect(answer[3].rank).to.equal(3);
-      //   expect(answer[4].rank).to.equal(2);
-      //   expect(answer[5].rank).to.equal(1);
-      // });
+      it("sorts 6 teams correctly, last team = locked & listed lowest rank", () => {
+        teams2Find = ["chiefs", "titans", "bucs", "ravens", "pack", "pats"];
 
-      {
-      }
+        teams = teams.filter((team) => teams2Find.includes(team.name));
 
-      // it("sorts 6 teams correctly, last team = locked & listed lowest rank", () => {
-      //   teams2Find = ["chiefs", "titans", "bucs", "ravens", "pack", "pats"];
+        teams = teams.map((team) => {
+          if (team.name === "chiefs") team.spread = "6";
+          if (team.name === "titans") team.spread = "5";
+          if (team.name === "bucs") team.spread = "1";
+          if (team.name === "ravens") team.spread = "1.5";
+          if (team.name === "pack") team.spread = "10";
 
-      //   teams = teams.filter((team) => teams2Find.includes(team.name));
+          if (team.name === "pats") {
+            team.spread = "3";
+            team.locked = true;
+            team.rank = 1;
+          }
 
-      //   teams = teams.map((team) => {
-      //     if (team.name === "chiefs") team.spread = "6";
-      //     if (team.name === "titans") team.spread = "5";
-      //     if (team.name === "bucs") team.spread = "1";
-      //     if (team.name === "ravens") team.spread = "1.5";
-      //     if (team.name === "pack") team.spread = "10";
+          return team;
+        });
 
-      //     if (team.name === "pats") {
-      //       team.spread = "3";
-      //       team.locked = true;
-      //       team.rank = 1;
-      //     }
+        answer = sort(teams);
 
-      //     return team;
-      //   });
+        lockedAudit = answer.map((user) => user.locked);
 
-      //   answer = sort(teams);
+        expect(lockedAudit[0]).to.equal(false);
+        expect(lockedAudit[1]).to.equal(false);
+        expect(lockedAudit[2]).to.equal(false);
+        expect(lockedAudit[3]).to.equal(false);
+        expect(lockedAudit[4]).to.equal(false);
+        expect(lockedAudit[5]).to.equal(true);
 
-      //   lockedAudit = answer.map((user) => user.locked);
+        expect(answer[0].name).to.equal("pack");
+        expect(answer[1].name).to.equal("chiefs");
+        expect(answer[2].name).to.equal("titans");
+        expect(answer[3].name).to.equal("ravens");
+        expect(answer[4].name).to.equal("bucs");
+        expect(answer[5].name).to.equal("pats");
 
-      //   expect(lockedAudit[0]).to.equal(false);
-      //   expect(lockedAudit[1]).to.equal(false);
-      //   expect(lockedAudit[2]).to.equal(false);
-      //   expect(lockedAudit[3]).to.equal(false);
-      //   expect(lockedAudit[4]).to.equal(true);
-
-      //   expect(answer[0].name).to.equal("pack");
-      //   expect(answer[1].name).to.equal("chiefs");
-      //   expect(answer[2].name).to.equal("titans");
-      //   expect(answer[3].name).to.equal("ravens");
-      //   expect(answer[4].name).to.equal("bucs");
-      //   expect(answer[5].name).to.equal("pats");
-
-      //   expect(answer[0].rank).to.equal(6);
-      //   expect(answer[1].rank).to.equal(5);
-      //   expect(answer[2].rank).to.equal(4);
-      //   expect(answer[3].rank).to.equal(3);
-      //   expect(answer[4].rank).to.equal(2);
-      //   expect(answer[5].rank).to.equal(1);
-      // });
-
-      {
-      }
+        expect(answer[0].rank).to.equal(6);
+        expect(answer[1].rank).to.equal(5);
+        expect(answer[2].rank).to.equal(4);
+        expect(answer[3].rank).to.equal(3);
+        expect(answer[4].rank).to.equal(2);
+        expect(answer[5].rank).to.equal(1);
+      });
 
       it("sorts 10 teams correctly", () => {
         teams2Find = [

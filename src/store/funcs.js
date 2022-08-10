@@ -139,23 +139,14 @@ const sort = (arr) => {
     // console.log("lockedAudit is true in sort func");
 
     const numOfTeams = arr.length + 1;
+    console.log("numOfTeams", numOfTeams);
 
     const ranksUsed = [];
-    const lockedTeams = arr
-      .filter((team) => team.locked)
-      .map((team) => {
-        const invertedRank =
-          team.rank === arr.length ? numOfTeams - team.rank : team.rank;
+    const lockedTeams = arr.filter((team) => team.locked);
 
-        ranksUsed.push(invertedRank);
+    lockedTeams.forEach((team) => ranksUsed.push(team.rank));
 
-        team.rank = invertedRank;
-
-        return team;
-      });
-
-    // console.log("lockedTeams", lockedTeams);
-    // console.log("rankUsed", ranksUsed);
+    console.log("rankUsed for locked teams", ranksUsed);
 
     const unLockedTeams = arr
       .filter((team) => !team.locked)
@@ -170,7 +161,8 @@ const sort = (arr) => {
         return team;
       });
 
-    // console.log("unLockedTeams", unLockedTeams);
+    console.log("lockedTeams", lockedTeams);
+    console.log("unLockedTeams", unLockedTeams);
 
     arr = [...lockedTeams, ...unLockedTeams];
   } else {
