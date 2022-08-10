@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { sort, clearTeams, loadTeams } from "../../store";
 import Button from "../Misc/Button";
@@ -8,19 +8,29 @@ import "./Rank.css";
 const Rank_Page = () => {
   const dispatch = useDispatch();
 
+  // const [loading, setLoading] = useState(true);
+
   const teams = useSelector((state) => state.teams);
+  // const numOfTeams = useSelector((state) => state.numOfTeams);
+
+  // console.log("teams outside setTimeout", teams);
+  // console.log("numOfTeams", numOfTeams);
 
   const rankInfo = sort(teams);
 
-  // let rankInfo = sort(teams);
+  // const rankInfo = teams.length === numOfTeams && sort(teams);
 
-  // let counter = teams.length;
+  // console.log("rankInfo OG", rankInfo);
 
-  // rankInfo.map((team) => {
-  //   team.rank = counter;
-  //   counter--;
-  //   return team;
-  // });
+  // setTimeout(() => {
+  //   console.log("teams in setTimeout", teams);
+  //   rankInfo = sort(teams);
+  //   console.log("rankInfo in setTimeout", rankInfo);
+  // }, 1000);
+
+  // setTimeout(() => {
+  //   setLoading(false);
+  // }, 1100);
 
   const columns = ["rank", "name"];
 

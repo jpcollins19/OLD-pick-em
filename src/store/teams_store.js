@@ -1,6 +1,8 @@
 import axios from "axios";
+import { sort } from "./funcs";
 
 const LOAD_TEAMS = "LOAD_TEAMS";
+// const LOAD_NUM_OF_TEAMS = "LOAD_NUM_OF_TEAMS";
 const ADD_TEAM = "ADD_TEAM";
 const DELETE_TEAM = "DELETE_TEAM";
 
@@ -9,6 +11,10 @@ const DELETE_TEAM = "DELETE_TEAM";
 const _loadTeams = (teams) => {
   return { type: LOAD_TEAMS, teams };
 };
+
+// const _loadNumOfTeams = (number) => {
+//   return { type: LOAD_NUM_OF_TEAMS, number };
+// };
 
 const _addTeam = (team) => {
   return { type: ADD_TEAM, team };
@@ -22,10 +28,18 @@ const _deleteTeam = (team) => {
 
 export const loadTeams = () => {
   return async (dispatch) => {
-    const teams = (await axios.get("/api/teams")).data;
+    let teams = (await axios.get("/api/teams")).data;
+    // dispatch(loadNumOfTeams(teams.length));
+
+    // console.log("teams before sort in thunk", teams);
+
+    // const newTeams = sort(teams);
+
     dispatch(_loadTeams(teams));
   };
 };
+
+export const addTeams = (teams) => {};
 
 export const addTeam = (team) => {
   return async (dispatch) => {
@@ -47,6 +61,12 @@ export const clearTeams = (teams) => {
   };
 };
 
+// export const loadNumOfTeams = (number) => {
+//   return async (dispatch) => {
+//     dispatch(_loadNumOfTeams(number));
+//   };
+// };
+
 export const teams = (state = [], action) => {
   switch (action.type) {
     case LOAD_TEAMS:
@@ -59,3 +79,12 @@ export const teams = (state = [], action) => {
       return state;
   }
 };
+
+// export const numOfTeams = (state = 0, action) => {
+//   switch (action.type) {
+//     case LOAD_NUM_OF_TEAMS:
+//       return action.number;
+//     default:
+//       return state;
+//   }
+// };

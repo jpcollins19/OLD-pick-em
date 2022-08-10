@@ -130,11 +130,9 @@ const sameSpreadAudit = (arr) => {
 
 const sort = (arr) => {
   let rank = arr.length;
-
   // console.log("rank", rank);
 
   const lockedAudit = arr.map((team) => team.locked);
-
   // console.log("lockedAudit", lockedAudit);
 
   if (lockedAudit.includes(true)) {
@@ -143,23 +141,23 @@ const sort = (arr) => {
     const numOfTeams = arr.length + 1;
 
     const ranksUsed = [];
-    const lockedTeams = [];
-
-    arr
+    const lockedTeams = arr
       .filter((team) => team.locked)
-      .forEach((team) => {
+      .map((team) => {
         const invertedRank =
           team.rank === arr.length ? numOfTeams - team.rank : team.rank;
 
         ranksUsed.push(invertedRank);
+
         team.rank = invertedRank;
-        lockedTeams.push(team);
+
+        return team;
       });
 
-    // console.log("rankUsed", ranksUsed);
     // console.log("lockedTeams", lockedTeams);
+    // console.log("rankUsed", ranksUsed);
 
-    arr = arr
+    const unLockedTeams = arr
       .filter((team) => !team.locked)
       .sort((a, b) => b.spread - a.spread)
       .map((team) => {
@@ -172,11 +170,9 @@ const sort = (arr) => {
         return team;
       });
 
-    // console.log("arr after filter", arr);
+    // console.log("unLockedTeams", unLockedTeams);
 
-    arr = [...arr, ...lockedTeams];
-
-    // console.log("arr after adding locked teams", arr);
+    arr = [...lockedTeams, ...unLockedTeams];
   } else {
     arr = arr
       .sort((a, b) => b.spread - a.spread)
@@ -185,9 +181,9 @@ const sort = (arr) => {
         rank--;
         return team;
       });
-
-    //console.log("arr after OG spread sort", arr);
   }
+
+  // console.log("arr after OG sort", arr);
 
   arr = sameSpreadAudit(arr);
 

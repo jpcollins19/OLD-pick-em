@@ -1,9 +1,12 @@
 const Column_Cont = ({ rankInfo, column }) => {
   return (
     <div className="column-cont">
-      <h2 className="white-text">
-        {column && column === "name" ? "Team" : "Rank"}
-      </h2>
+      {rankInfo && rankInfo.length && (
+        <h2 className="white-text">
+          {column && column === "name" ? "Team" : "Rank"}
+        </h2>
+      )}
+
       {rankInfo &&
         rankInfo.map((team, idx) => (
           <input

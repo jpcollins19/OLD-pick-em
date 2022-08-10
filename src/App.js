@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { HashRouter as Router } from "react-router-dom";
-import Routes from "./Routes";
 import { loadTeams } from "./store";
 import Spread_Page from "./components/Spread/Spread_Page";
 import Rank_Page from "./components/Rank/Rank_Page";

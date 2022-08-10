@@ -47,7 +47,7 @@ const Spread_Page = () => {
 
       const teams = Object.values(setObj);
 
-      // console.log("teams", teams);
+      console.log("teams in submit", teams);
 
       for (let i = 0; i < teams.length; i++) {
         const lastTeam = teams[i].lastTeam;
