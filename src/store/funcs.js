@@ -1,3 +1,5 @@
+const { menuItemClasses } = require("@mui/material");
+
 const createCountObj = (arr, key) => {
   return arr.reduce((a, obj) => {
     a[obj[key]] ? a[obj[key]]++ : (a[obj[key]] = 1);
@@ -48,43 +50,80 @@ const randomizeSingleSpread = (arr) => {
 
   const lockedAudit = arr.map((team) => team.locked);
 
-  if (lockedAudit.includes(false)) {
-    let rank = arr[0].rank;
+  let numOfTeams = arr.length;
 
-    arr.forEach((team) => {
-      if (team.rank > rank) rank = team.rank;
+  let counter = numOfTeams;
+
+  let highestRank = arr[0].rank;
+  let lowestRank = arr[0].rank;
+
+  arr.forEach((team) => {
+    if (team.rank > highestRank) highestRank = team.rank;
+    if (team.rank < lowestRank) lowestRank = team.rank;
+  });
+
+  // console.log("highestRank", highestRank);
+  // console.log("lowestRank", lowestRank);
+
+  const ranksUsed = [];
+  const idxsUsed = [];
+
+  const randomizedObj = {};
+
+  let randomRank, randomIdx, lockedTeams, unLockedTeams, currentIdxTeam;
+
+  if (lockedAudit.includes(true)) {
+    // console.log("lockedAudit = true");
+    lockedTeams = arr.filter((team) => team.locked);
+    unLockedTeams = arr.filter((team) => !team.locked);
+
+    // console.log("lockedTeams", lockedTeams);
+    // console.log("unLockedTeams", unLockedTeams);
+
+    lockedTeams.forEach((team) => {
+      ranksUsed.push(team.rank);
+      randomizedObj[team.rank] = team.name;
+      counter--;
     });
 
-    // console.log("rank", rank);
+    numOfTeams = unLockedTeams.length;
+  }
 
-    let onTeam = 0;
+  // console.log("randomizedObj", randomizedObj);
+  // console.log("counter", counter);
 
-    const numOfTeams = arr.length;
+  if (unLockedTeams !== undefined && unLockedTeams.length === 1) {
+    const team = unLockedTeams[0];
 
-    let counter = numOfTeams;
-
-    const randomizedObj = {};
-
+    randomizedObj[team.rank] = team.name;
+  } else {
     while (counter > 0) {
-      let random = Math.ceil(Math.random() * numOfTeams);
+      randomRank = Math.ceil(Math.random() * highestRank);
+      randomIdx = Math.floor(Math.random() * numOfTeams);
 
-      if (!randomizedObj[random]) {
-        randomizedObj[random] = arr[onTeam].name;
+      if (
+        randomRank >= lowestRank &&
+        randomRank <= highestRank &&
+        !ranksUsed.includes(randomRank) &&
+        !idxsUsed.includes(randomIdx)
+      ) {
+        currentIdxTeam = lockedAudit.includes(true)
+          ? unLockedTeams[randomIdx].name
+          : arr[randomIdx].name;
+
+        randomizedObj[randomRank] = currentIdxTeam;
+        ranksUsed.push(randomRank);
+        idxsUsed.push(randomIdx);
         counter--;
-        onTeam++;
       }
     }
-
-    // console.log("randomizedObj", randomizedObj);
-
-    arr = Object.values(randomizedObj).map((teamName) => {
-      teamName = arr.find((team) => team.name === teamName);
-
-      teamName.rank = rank;
-      rank--;
-      return teamName;
-    });
   }
+
+  arr = Object.entries(randomizedObj).map((entry) => {
+    team = arr.find((team) => team.name === entry[1]);
+    team.rank = Number(entry[0]);
+    return team;
+  });
 
   // console.log("randomizeSingleSpread arr before return", arr);
 
@@ -192,89 +231,6 @@ const sort = (arr) => {
   // console.log("arr after sameSpreadAudit", arr);
 
   return arr.sort((a, b) => b.rank - a.rank);
-
-  // console.log("nugget", sameSpreadCalc(arr));
-
-  // const spreadsUsed = [];
-  // const rankNumbersUsed = [];
-
-  // let reduceArrayAnswer = [];
-  // let ranking = arr.length;
-
-  // arr
-  //   .filter((obj) => obj.locked === true)
-  //   .map((obj) => {
-  //     const teamObj = {};
-
-  //     teamObj.rank = obj.rank;
-  //     teamObj.name = obj.name;
-  //     teamObj.spread = obj.spread;
-
-  //     reduceArrayAnswer.push(teamObj);
-  //     rankNumbersUsed.push(obj.rank);
-  //   });
-
-  // let currentRank = arr.length;
-  // const onHoldObjects = [];
-
-  // return spreadOrderArray
-  //   .reduce((a, spread) => {
-  //     while (rankNumbersUsed.includes(ranking)) {
-  //       ranking--;
-  //     }
-
-  //     if (!spreadsUsed.includes(spread)) {
-  //       const teamArrayBasedOnSpread = spreadWTeamsAsArr[spread];
-  //       // [ 'hawks' ] || [ 'hawks', 'vikings' ]
-
-  //       if (teamArrayBasedOnSpread.length === 1) {
-  //         const teamObj = arr.filter(
-  //           (obj) => obj.name === teamArrayBasedOnSpread[0]
-  //         )[0];
-
-  //         if (!teamObj.locked) {
-  //           spreadsUsed.push(spread);
-  //           const teamObj2Submit = {};
-  //           teamObj2Submit.rank = ranking;
-  //           teamObj2Submit.name = teamArrayBasedOnSpread[0];
-  //           teamObj2Submit.spread = spread;
-  //           a.push(teamObj2Submit);
-  //           rankNumbersUsed.push(ranking);
-  //           ranking--;
-  //         }
-  //       } else {
-  //         spreadsUsed.push(spread);
-
-  //         const teamListing = teamArrayBasedOnSpread.map((team) => {
-  //           const teamObj = arr.filter((obj) => obj.name === team);
-
-  //           return teamObj[0];
-  //         });
-
-  //         const teamOrder = sameSpreadCalc(teamListing);
-
-  //         Object.values(teamOrder).map((team) => {
-  //           const teamObjInfo = arr.filter(
-  //             (obj) => obj.name === team && !obj.locked
-  //           )[0];
-
-  //           if (teamObjInfo !== undefined) {
-  //             const teamObj2Submit = {};
-
-  //             teamObj2Submit.rank = ranking;
-  //             teamObj2Submit.name = teamObjInfo.name;
-  //             teamObj2Submit.spread = spread;
-  //             a.push(teamObj2Submit);
-  //             rankNumbersUsed.push(ranking);
-  //             ranking--;
-  //           }
-  //         });
-  //       }
-  //     }
-
-  //     return a;
-  //   }, reduceArrayAnswer)
-  //   .sort((a, b) => b.rank - a.rank);
 };
 
 module.exports = { sort, setAudit, blankAuditFunc };
