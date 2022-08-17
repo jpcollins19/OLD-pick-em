@@ -1,4 +1,4 @@
-const { menuItemClasses } = require("@mui/material");
+const { menuItemClasses, emphasize } = require("@mui/material");
 
 const createCountObj = (arr, key) => {
   return arr.reduce((a, obj) => {
@@ -45,8 +45,9 @@ const blankAuditFunc = (setObj) => {
   return error;
 };
 
-const randomizeSingleSpread = (arr) => {
+const randomizeSingleSpread = (arr, lockedRanks) => {
   // console.log("randomizeSingleSpread arr", arr);
+  // console.log("randomizeSingleSpread lockedRanks", lockedRanks);
 
   const lockedAudit = arr.map((team) => team.locked);
 
@@ -54,18 +55,31 @@ const randomizeSingleSpread = (arr) => {
 
   let counter = numOfTeams;
 
-  let highestRank = arr[0].rank;
-  let lowestRank = arr[0].rank;
+  let highestRank = -1;
+  let lowestRank = 99;
 
-  arr.forEach((team) => {
-    if (team.rank > highestRank) highestRank = team.rank;
-    if (team.rank < lowestRank) lowestRank = team.rank;
-  });
+  arr
+    .filter((team) => !team.locked)
+    .forEach((team) => {
+      if (team.rank > highestRank) highestRank = team.rank;
+      if (team.rank < lowestRank) lowestRank = team.rank;
+    });
+
+  // lockedRanks &&
+  //   lockedRanks.forEach((team) => {
+  //     if (team.rank > highestRank) highestRank = team.rank;
+  //     if (team.rank < lowestRank) lowestRank = team.rank;
+  //   });
 
   // console.log("highestRank", highestRank);
   // console.log("lowestRank", lowestRank);
 
   const ranksUsed = [];
+
+  lockedRanks.length && lockedRanks.forEach((rank) => ranksUsed.push(rank));
+
+  // console.log("ranksUsed", ranksUsed);
+
   const idxsUsed = [];
 
   const randomizedObj = {};
@@ -130,8 +144,9 @@ const randomizeSingleSpread = (arr) => {
   return arr;
 };
 
-const randomize = (arr) => {
+const randomize = (arr, lockedRanks) => {
   // console.log("randomize OG arr", arr);
+  // console.log("randomize OG lockedRanks", lockedRanks);
 
   const sameSpreadAuditObj = arr.reduce((a, team) => {
     !a[team.spread] ? (a[team.spread] = [team]) : a[team.spread].push(team);
@@ -144,7 +159,10 @@ const randomize = (arr) => {
   let newArr = [];
 
   Object.keys(sameSpreadAuditObj).forEach((number) => {
-    const newOrder = randomizeSingleSpread(sameSpreadAuditObj[number]);
+    const newOrder = randomizeSingleSpread(
+      sameSpreadAuditObj[number],
+      lockedRanks
+    );
 
     newArr = [...newArr, ...newOrder];
   });
@@ -161,6 +179,17 @@ const sameSpreadAudit = (arr) => {
 
   // console.log("spreadCountObj", spreadCountObj);
 
+  const lockedTeams = arr.filter((team) => team.locked);
+
+  // console.log("lockedTeams", lockedTeams);
+
+  const lockedRanks = [];
+
+  if (lockedTeams.length)
+    lockedTeams.forEach((team) => lockedRanks.push(team.rank));
+
+  // console.log("lockedRanks", lockedRanks);
+
   let dupeSpreadTeams = arr.filter((team) => spreadCountObj[team.spread] > 1);
   let nonDupeSpreadTeams = arr.filter(
     (team) => spreadCountObj[team.spread] === 1
@@ -169,7 +198,8 @@ const sameSpreadAudit = (arr) => {
   // console.log("dupeSpreadTeams before randomize", dupeSpreadTeams);
   // console.log("nonDupeSpreadTeams", nonDupeSpreadTeams);
 
-  if (dupeSpreadTeams.length) dupeSpreadTeams = randomize(dupeSpreadTeams);
+  if (dupeSpreadTeams.length)
+    dupeSpreadTeams = randomize(dupeSpreadTeams, lockedRanks);
 
   // console.log("dupeSpreadTeams after randomize", dupeSpreadTeams);
 

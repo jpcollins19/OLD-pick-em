@@ -1,12 +1,4 @@
 //test below w/ 10 teams
-//2+ non-locked w/ 1 same spread, locks are in sequetial order, no dupes in locked, a non locked team has the same spread as the locked dupe spread
-//2+ non-locked w/ 1 same spread, locks are in sequetial order, no dupes in locked, no non locked team has the same spread as the locked dupe spread
-//2+ non-locked w/ same spread for 2 diff spreads, locks are in sequetial order, no dupes in locked, a non locked team has the same spread as the locked dupe spread
-//2+ non-locked w/ same spread for 2 diff spreads, locks are in sequetial order, no dupes in locked, no non locked team has the same spread as the locked dupe spread
-//2+ non-locked w/ 1 same spread, locks are NOT in sequetial order, no dupes in locked, a non locked team has the same spread as the locked dupe spread
-//2+ non-locked w/ 1 same spread, locks are NOT in sequetial order, no dupes in locked, no non locked team has the same spread as the locked dupe spread
-//2+ non-locked w/ same spread for 2 diff spreads, locks are NOT in sequetial order, no dupes in locked, a non locked team has the same spread as the locked dupe spread
-//2+ non-locked w/ same spread for 2 diff spreads, locks are NOT in sequetial order, no dupes in locked, no non locked team has the same spread as the locked dupe spread
 
 //2+ locked w/ 1 same spread, locks are in sequetial order, dupes for non-locked too, non-locked dupes are also in sequential order, non locked teams have the same spread as the locked dupe spread
 //2+ locked w/ 1 same spread, locks are in sequetial order, dupes for non-locked too, non-locked dupes are also in sequential order,non locked teams have diff dupe spread as the locked dupe spread
