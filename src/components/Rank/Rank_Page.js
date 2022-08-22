@@ -8,29 +8,9 @@ import "./Rank.css";
 const Rank_Page = () => {
   const dispatch = useDispatch();
 
-  // const [loading, setLoading] = useState(true);
-
   const teams = useSelector((state) => state.teams);
-  // const numOfTeams = useSelector((state) => state.numOfTeams);
-
-  // console.log("teams outside setTimeout", teams);
-  // console.log("numOfTeams", numOfTeams);
 
   const rankInfo = sort(teams);
-
-  // const rankInfo = teams.length === numOfTeams && sort(teams);
-
-  // console.log("rankInfo OG", rankInfo);
-
-  // setTimeout(() => {
-  //   console.log("teams in setTimeout", teams);
-  //   rankInfo = sort(teams);
-  //   console.log("rankInfo in setTimeout", rankInfo);
-  // }, 1000);
-
-  // setTimeout(() => {
-  //   setLoading(false);
-  // }, 1100);
 
   const columns = ["rank", "name"];
 

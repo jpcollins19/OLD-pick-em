@@ -35,19 +35,13 @@ const Spread_Page = () => {
         : key === "lastTeam"
         ? true
         : answer;
-
-    console.log("setObj", setObj);
   };
 
   const onSubmit = async (evt) => {
     evt.preventDefault();
 
     try {
-      // console.log("submit started");
-
       const teams = Object.values(setObj);
-
-      console.log("teams in submit", teams);
 
       for (let i = 0; i < teams.length; i++) {
         const lastTeam = teams[i].lastTeam;

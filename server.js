@@ -1,17 +1,6 @@
-//test below w/ 16 teams
-//
-//2+ non-locked w/ same spread, only 1 team = locked, locked team has diff spread as the non-locked dupe spread
-//2+ non-locked w/ same spread for 2 diff spreads, only 1 team = locked, locked team has the same spread as the non-locked dupe spread
-//2+ non-locked w/ same spread for 2 diff spreads, only 1 team = locked, locked team has diff spread as the non-locked dupe spread
-
-//2+ non-locked w/ same spread, 2+ teams = locked, but with diff spreads for each lock, one of the locked spreads is the same as the dupe non-locked spread
-//2+ non-locked w/ same spread, 2+ teams = locked, but with diff spreads for each lock, locked spreads are diff from the dupe non-locked spread
-//2+ non-locked w/ same spread for 2 diff spreads, 2+ teams = locked, but with diff spreads for each lock, one of the locked spreads is the same as the dupe non-locked spread
-//2+ non-locked w/ same spread for 2 diff spreads, 2+ teams = locked, but with diff spreads for each lock, locked spreads are diff from the dupe non-locked spread
-
 //local:host work - try and break everything
 
-//roll through each file and comment stuff out
+//roll through func and comment stuff out
 
 const express = require("express");
 const app = express();
