@@ -1,7 +1,3 @@
-//local:host work - try and break everything
-
-//roll through func and comment stuff out
-
 const express = require("express");
 const app = express();
 const syncAndSeed = require("./server/script/seed");
