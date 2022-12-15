@@ -6,7 +6,7 @@ const Row_Cont = ({ number, onChange }) => {
       {columns.map((column) => (
         <div key={column} className={`${column}-cont`}>
           <input
-            className={column !== "lockwd" ? "center bold" : ""}
+            className={column !== "locked" ? "center bold" : ""}
             type={
               column === "locked" || column === "lastTeam" ? "checkbox" : ""
             }
